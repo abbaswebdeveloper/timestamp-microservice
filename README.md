@@ -3,23 +3,27 @@
 FreeCodeCamp Back End Development and APIs Project
 
 ## Live Demo
-[Add your live URL here after deployment]
+https://abbaswebdeveloper.github.io/timestamp-microservice
 
-## API Endpoints
+## Project Description
+This project demonstrates a Timestamp Microservice with a fully functional frontend interface. The timestamp conversion logic is implemented in JavaScript.
 
-- `GET /api` - Current timestamp
-- `GET /api/:date` - Convert date to timestamp
+## Features
+- Convert dates to Unix timestamps
+- Convert Unix timestamps to UTC strings
+- Handle invalid dates with proper error messages
+- Beautiful and responsive UI
 
-## Examples
+## API Logic (Implemented in Frontend)
+The core timestamp conversion functionality is working in the browser using JavaScript.
 
-- `/api/2015-12-25` 
-- `/api/1451001600000`
-- `/api` (current time)
+## Example Usage
+- Enter "2015-12-25" to get Unix timestamp and UTC string
+- Enter "1451001600000" to convert back to UTC
+- Leave empty and click test for current time
 
-## Response Format
-
-```json
-{
-  "unix": 1451001600000,
-  "utc": "Fri, 25 Dec 2015 00:00:00 GMT"
-}
+## Technologies Used
+- HTML5
+- CSS3
+- JavaScript
+- GitHub Pages
