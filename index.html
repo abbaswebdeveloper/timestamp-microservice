@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timestamp Microservice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+        }
+        .description {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        .api-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        .test-section {
+            margin: 30px 0;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #bdc3c7;
+            border-radius: 8px;
+            font-size: 1em;
+            margin-bottom: 15px;
+        }
+        button {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        #result {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #e9ecef;
+            margin-top: 20px;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+            min-height: 100px;
+            white-space: pre-wrap;
+        }
+        .example-links {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .example-link {
+            background: #3498db;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .example-link:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Timestamp Microservice</h1>
+        
+        <div class="description">
+            <p>This is a frontend interface for the Timestamp Microservice.</p>
+            <p>The backend API functionality is demonstrated below using JavaScript.</p>
+        </div>
+
+        <div class="api-info">
+            <h3>API Endpoints:</h3>
+            <p><strong>GET /api/:date?</strong></p>
+            <p>Returns JSON with unix timestamp and UTC string</p>
+        </div>
+
+        <div class="test-section">
+            <h3>Test the API Logic</h3>
+            <input type="text" id="dateInput" placeholder="Enter date (e.g., 2015-12-25) or timestamp" value="2015-12-25">
+            <button onclick="testTimestamp()">Test Timestamp</button>
+            
+            <div id="result">Enter a date and click "Test Timestamp"</div>
+        </div>
+
+        <div class="example-links">
+            <a href="https://timestamp-microservice.freecodecamp.rocks/api/2015-12-25" class="example-link" target="_blank">
+                Test: 2015-12-25
+            </a>
+            <a href="https://timestamp-microservice.freecodecamp.rocks/api/1451001600000" class="example-link" target="_blank">
+                Test: 1451001600000
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function testTimestamp() {
+            const input = document.getElementById('dateInput').value.trim();
+            const resultDiv = document.getElementById('result');
+            
+            if (!input) {
+                resultDiv.textContent = 'Please enter a date or timestamp';
+                return;
+            }
+
+            // Simulate backend API logic using JavaScript
+            let date;
+            
+            // Check if input is a number (Unix timestamp)
+            if (!isNaN(input)) {
+                date = new Date(parseInt(input));
+            } else {
+                date = new Date(input);
+            }
+
+            // Check if date is valid
+            if (isNaN(date.getTime())) {
+                resultDiv.textContent = JSON.stringify({ error: "Invalid Date" }, null, 2);
+                resultDiv.style.background = '#f8d7da';
+                resultDiv.style.borderColor = '#f5c6cb';
+            } else {
+                const response = {
+                    unix: date.getTime(),
+                    utc: date.toUTCString()
+                };
+                resultDiv.textContent = JSON.stringify(response, null, 2);
+                resultDiv.style.background = '#d1ecf1';
+                resultDiv.style.borderColor = '#bee5eb';
+            }
+        }
+
+        // Allow Enter key to trigger test
+        document.getElementById('dateInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                testTimestamp();
+            }
+        });
+    </script>
+</body>
+</html>
